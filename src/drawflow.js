@@ -1301,6 +1301,7 @@ export default class Drawflow {
     var moduleName = this.getModuleFromNodeId(id)
     return JSON.parse(JSON.stringify(this.drawflow.drawflow[moduleName].data[id]));
   }
+  
   getNodesFromName(name) {
     var nodes = [];
     const editor = this.drawflow.drawflow
@@ -1309,6 +1310,17 @@ export default class Drawflow {
         if(editor[moduleName].data[node].name == name) {
           nodes.push(editor[moduleName].data[node].id);
         }
+      }
+    });
+    return nodes;
+  }
+
+  getAllNodes() {
+    var nodes = [];
+    const editor = this.drawflow.drawflow
+    Object.keys(editor).map(function(moduleName, index) {
+      for (var node in editor[moduleName].data) {
+        nodes.push(editor[moduleName].data[node].id);
       }
     });
     return nodes;
